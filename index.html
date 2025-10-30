@@ -1,2 +1,325 @@
-<p>Hello world I am shohidul islam</p>
-<h3>I am shohiudl islam</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CTG Canteen Portal - Admin Access</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- OCEAN WAVE BACKGROUND --- */
+        html, body { 
+            height: 100%; 
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            background: radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ocean { 
+            height: 5%;
+            width:100%;
+            position:absolute;
+            bottom:0;
+            left:0;
+            background: #015871;
+            z-index: -1;
+        }
+
+        .wave {
+            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
+            position: absolute;
+            top: -198px;
+            width: 6400px;
+            height: 198px;
+            animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .wave:nth-of-type(2) {
+            top: -175px;
+            animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+            opacity: 1;
+        }
+
+        @keyframes wave {
+            0% { margin-left: 0; }
+            100% { margin-left: -1600px; }
+        }
+
+        @keyframes swell {
+            0%, 100% { transform: translate3d(0,-25px,0); }
+            50% { transform: translate3d(0,5px,0); }
+        }
+        
+        /* --- "GLASSMORPHISM" CONTAINER --- */
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+        }
+        .submission-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: #b20000;
+            margin-bottom: 15px;
+        }
+        
+        /* --- NOTICE BOX STYLES --- */
+        .notice-box {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin: 0 0 25px 0;
+            text-align: left;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .notice-date {
+            text-align: center;
+            color: #b20000;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 0 0 10px 0;
+        }
+        .notice-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .notice-list li {
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .notice-list li:last-child {
+            margin-bottom: 0;
+        }
+        .notice-list li i {
+            margin-right: 10px;
+            color: #015871;
+            width: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: #fff;
+            padding: 16px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%; /* Made buttons full width for clean look */
+        }
+        .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .button:active {
+            transform: translateY(1px) scale(1);
+        }
+        .admin-panel-button {
+            background-color: rgba(167, 65, 34, 0.8);
+            display: none; /* Initially hidden until login is successful */
+        }
+        .admin-login-btn {
+             background-color: rgba(0, 123, 255, 0.8); /* Use a standard button color for the login prompt */
+        }
+        .button i {
+            font-size: 1.1em;
+        }
+
+        /* --- STYLES FOR THE LOGIN MODAL --- */
+        .modal-overlay {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe; color: #333; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; position: relative;
+        }
+        .close-button {
+            color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer;
+        }
+        .form-group input {
+            width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; box-sizing: border-box; font-family: 'Poppins', sans-serif; transition: all 0.2s ease;
+        }
+        .form-group input:focus {
+            border-color: #007BFF; box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); outline: none;
+        }
+        .submit-btn {
+            width: 100%; background-color: #28a745;
+        }
+        .message {
+            margin-top: 15px; padding: 10px; border-radius: 5px; font-weight: 600; display: none;
+        }
+        .message.error {
+            display: block; background-color: #f8d7da; color: #721c24;
+        }
+        .message.success {
+            display: block; background-color: #d4edda; color: #155724;
+        }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .footer { 
+            margin-top: 20px; font-size: 14px; color: #015871; font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 28px; }
+            .button { width: 100%; margin: 10px 0; }
+        }
+		/* --- NEW STYLES FOR COLOR FADE ANIMATION --- */
+        @keyframes colorFade {
+            0% { color: #b20000; }
+            50% { color: #ff3d3d; }
+            100% { color: #b20000; }
+        }
+
+        .animated-time {
+            display: inline-block;
+            font-weight: 700;
+            animation: colorFade 2s infinite ease-in-out;
+        }
+        /* --- END OF NEW STYLES --- */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to CTG Canteen</h1>
+        <p class=".submission-time"></p>
+        <p style="color:red; font-size:20 px"><u></u></p>
+		<p style="color:#b20000"> <b class="animated-time">Admin Access</b></p>
+        
+        <button class="button admin-login-btn" id="admin-login-btn"><i class="fa-solid fa-lock"></i> Admin Login</button>
+
+        <a href="ttps://n8n.srv915514.hstgr.cloud/form/83e440b1-9205-499b-a34d-4dae6f441a6a" target="_blank" id="admin-panel-link">
+            <button class="button admin-panel-button"><i class="fa-solid fa-sliders"></i> Admin Panel</button>
+        </a>
+    </div>
+
+    <footer class="footer">
+        CTG Canteen Portal &copy; 2025
+    </footer>
+
+    <div class="ocean">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="userid">User ID:</label>
+                    <input type="text" id="userid" name="userid" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div id="login-message" class="message"></div>
+                <button type="submit" class="button submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const loginModal = document.getElementById('login-modal');
+        const closeBtn = document.querySelector('.close-button');
+        const loginForm = document.getElementById('login-form');
+        const adminPanelLink = document.getElementById('admin-panel-link');
+        const loginMessage = document.getElementById('login-message');
+
+        // Show the login modal when the "Admin Login" button is clicked
+        adminLoginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+            loginMessage.style.display = 'none';
+            loginForm.reset();
+        });
+
+        // Close modal when the close button is clicked
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Handle the login attempt
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const userID = document.getElementById('userid').value;
+            const password = document.getElementById('password').value;
+
+            // Authentication check
+            if (userID === "ctg" && password === "Ctg@123") {
+                loginMessage.textContent = "Login Successful! Redirecting...";
+                loginMessage.className = 'message success';
+                loginMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    // Hide modal and login button, show Admin Panel button
+                    loginModal.style.display = 'none';
+                    adminPanelLink.style.display = 'inline-block';
+                    adminLoginBtn.style.display = 'none';
+                }, 1000);
+
+            } else {
+                loginMessage.textContent = "Incorrect ID or Password!";
+                loginMessage.className = 'message error';
+            }
+        });
+    </script>
+</body>
+</html>
